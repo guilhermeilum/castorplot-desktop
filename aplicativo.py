@@ -210,6 +210,7 @@ class Ui_MainWindow(object):
         font.setPointSize(8)
         self.procurar_arquivo.setFont(font)
         self.procurar_arquivo.setObjectName("procurar_arquivo")
+        self.procurar_arquivo.setMaximumSize(QtCore.QSize(100, 150))
         self.horizontalLayout_3.addWidget(self.procurar_arquivo)
         self.verticalLayout_2.addLayout(self.horizontalLayout_3)
         self.gridLayout_3.addLayout(self.verticalLayout_2, 0, 0, 1, 1)
@@ -233,9 +234,9 @@ class Ui_MainWindow(object):
         self.label_15.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.label_15.setObjectName("label_15")
         self.gridLayout_7.addWidget(self.label_15, 0, 0, 1, 1)
-        self.graphicsView = QtWidgets.QGraphicsView(self.plot_puro)
-        self.graphicsView.setObjectName("graphicsView")
-        self.gridLayout_7.addWidget(self.graphicsView, 1, 0, 1, 1)
+        self.Widget_plot_puro = QtWidgets.QWidget(self.plot_puro)
+        self.Widget_plot_puro.setObjectName("Widget")
+        self.gridLayout_7.addWidget(self.Widget_plot_puro, 1, 0, 1, 1)
         self.widget_4 = QtWidgets.QWidget(self.plot_puro)
         self.widget_4.setObjectName("widget_4")
         self.gridLayout_6 = QtWidgets.QGridLayout(self.widget_4)
@@ -701,9 +702,9 @@ class Ui_MainWindow(object):
         self.label_5 = QtWidgets.QLabel(self.widget_10)
         self.label_5.setObjectName("label_5")
         self.verticalLayout_27.addWidget(self.label_5)
-        self.checkBox_2 = QtWidgets.QCheckBox(self.widget_10)
-        self.checkBox_2.setObjectName("checkBox_2")
-        self.verticalLayout_27.addWidget(self.checkBox_2)
+        self.transparente_borda = QtWidgets.QCheckBox(self.widget_10)
+        self.transparente_borda.setObjectName("transparente_borda")
+        self.verticalLayout_27.addWidget(self.transparente_borda)
         self.widget_23 = QtWidgets.QWidget(self.widget_10)
         self.widget_23.setObjectName("widget_23")
         self.horizontalLayout_8 = QtWidgets.QHBoxLayout(self.widget_23)
@@ -732,9 +733,9 @@ class Ui_MainWindow(object):
         self.label_6 = QtWidgets.QLabel(self.widget_11)
         self.label_6.setObjectName("label_6")
         self.verticalLayout_29.addWidget(self.label_6)
-        self.checkBox_3 = QtWidgets.QCheckBox(self.widget_11)
-        self.checkBox_3.setObjectName("checkBox_3")
-        self.verticalLayout_29.addWidget(self.checkBox_3)
+        self.transparente_fundo = QtWidgets.QCheckBox(self.widget_11)
+        self.transparente_fundo.setObjectName("transparente_fundo")
+        self.verticalLayout_29.addWidget(self.transparente_fundo)
         self.horizontalLayout_10 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_10.setObjectName("horizontalLayout_10")
         self.label_23 = QtWidgets.QLabel(self.widget_11)
@@ -761,9 +762,9 @@ class Ui_MainWindow(object):
         self.label_26 = QtWidgets.QLabel(self.widget_13)
         self.label_26.setObjectName("label_26")
         self.verticalLayout_32.addWidget(self.label_26)
-        self.checkBox_6 = QtWidgets.QCheckBox(self.widget_13)
-        self.checkBox_6.setObjectName("checkBox_6")
-        self.verticalLayout_32.addWidget(self.checkBox_6)
+        self.tirar_grade = QtWidgets.QCheckBox(self.widget_13)
+        self.tirar_grade.setObjectName("tirar_grade")
+        self.verticalLayout_32.addWidget(self.tirar_grade)
         self.horizontalLayout_16 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_16.setObjectName("horizontalLayout_16")
         self.label_27 = QtWidgets.QLabel(self.widget_13)
@@ -1075,7 +1076,20 @@ class Ui_MainWindow(object):
         self.cor_picker_borda.clicked.connect(self.cor_borda_func)
         self.cor_picker_fundo.clicked.connect(self.cor_fundo_func)
         self.cor_picker_grade.clicked.connect(self.cor_grade_func)
-
+        
+        self.Cor_texto.setStyleSheet(
+                f"""color: #ffffff;background-color: #000000"""
+            )
+        self.Cor_borda.setStyleSheet(
+                f"""color: #000000;background-color: #ffffff"""
+            )
+        self.Cor_fundo.setStyleSheet(
+                f"""color: #000000;background-color: #ffffff"""
+            )
+        self.Cor_grade.setStyleSheet(
+                f"""color: #ffffff;background-color: #000000"""
+            )
+        
         # mudar cor escrito
         self.Cor_grade.textChanged.connect(self.mudar_cor_escrito_grade)
         self.Cor_fundo.textChanged.connect(self.mudar_cor_escrito_fundo)
@@ -1085,6 +1099,7 @@ class Ui_MainWindow(object):
         
         #procurar arquivo
         arquivos = self.procurar_arquivo.clicked.connect(self.arquivo_procurar)
+        
 
     # funções botões GUI
     def tela_importar(self):
@@ -1277,7 +1292,7 @@ class Ui_MainWindow(object):
         self.label_9.setText(
             _translate("MainWindow", "Importar arquivos para plotagem.")
         )
-        self.procurar_arquivo.setText(_translate("MainWindow", "Abrir"))
+        self.procurar_arquivo.setText(_translate("MainWindow", "Importar"))
         self.label_15.setText(_translate("MainWindow", "Plot dados puros"))
         self.continuar_dados_puros.setText(_translate("MainWindow", "Continuar"))
         self.voltar_dados_puros.setText(_translate("MainWindow", "Voltar"))
@@ -1325,15 +1340,15 @@ class Ui_MainWindow(object):
         self.label_42.setText(_translate("MainWindow", "Cor da linha"))
         self.label_52.setText(_translate("MainWindow", "Cor hexadecimal"))
         self.label_5.setText(_translate("MainWindow", "Cor da borda do gráfico"))
-        self.checkBox_2.setText(_translate("MainWindow", "Transparente"))
+        self.transparente_borda.setText(_translate("MainWindow", "Transparente"))
         self.label_22.setText(_translate("MainWindow", "Cor hexadecimal"))
         self.Cor_borda.setText(_translate("MainWindow", "#ffffff"))
         self.label_6.setText(_translate("MainWindow", "Cor do fundo do gráfico"))
-        self.checkBox_3.setText(_translate("MainWindow", "Transparente"))
+        self.transparente_fundo.setText(_translate("MainWindow", "Transparente"))
         self.label_23.setText(_translate("MainWindow", "Cor hexadecimal"))
         self.Cor_fundo.setText(_translate("MainWindow", "#ffffff"))
         self.label_26.setText(_translate("MainWindow", "Cor da grade do gráfico"))
-        self.checkBox_6.setText(_translate("MainWindow", "Tirar grade"))
+        self.tirar_grade.setText(_translate("MainWindow", "Tirar grade"))
         self.label_27.setText(_translate("MainWindow", "Cor hexadecimal"))
         self.Cor_grade.setText(_translate("MainWindow", "#000000"))
         self.tabWidget.setTabText(
